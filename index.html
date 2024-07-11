@@ -8,8 +8,33 @@
   </head>
   <body>
     <header>
-      <h1>광주소프트웨어마이스터고등학교 급식판</h1>
+      <div>
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlpx5M5t6y0B6J6jt0f2XhMpCjC5epkyOfKQ&s"
+          alt="로고 이미지"
+        />
+        <h1>광주소프트웨어마이스터고등학교 오늘의 급식판</h1>
+      </div>
+      <div id="button">
+        <button onclick="showMeal('morning')">조식</button>
+        <button onclick="showMeal('lunch')">중식</button>
+        <button onclick="showMeal('evening')">석식</button>
+      </div>
     </header>
+    <div class="container">
+      <div id="morning" class="hidden">
+        <h2>조식</h2>
+        <ul></ul>
+      </div>
+      <div id="lunch" class="hidden">
+        <h2>중식</h2>
+        <ul></ul>
+      </div>
+      <div id="evening" class="hidden">
+        <h2>석식</h2>
+        <ul></ul>
+      </div>
+    </div>
     <script src="app.js"></script>
   </body>
 </html>
