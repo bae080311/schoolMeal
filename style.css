@@ -1,0 +1,19 @@
+body {
+  text-align: center;
+}
+.hidden {
+  display: none;
+}
+ul {
+  display: inline;
+  gap: 10px;
+}
+button {
+  margin: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(36, 184, 243);
+  color: white;
+  font-size: large;
+  font-weight: 600;
+}
