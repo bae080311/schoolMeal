@@ -1,16 +1,20 @@
 const apiUrl = "https://open.neis.go.kr/hub/mealServiceDietInfo";
 let today = new Date();
 let year = today.getFullYear();
-let month = (today.getMonth() + 1).toString().padStart(2, "0");
-let day = today.getDate().toString().padStart(2, "0");
-let yyyymmdd = `${year}${month}${day}`;
-let yyyy_mm_dd = `${year}/${month}/${day}`;
+let month = today.getMonth() + 1; // 숫자로 처리
+let day = today.getDate();
+let yyyymmdd = formatDate(year, month, day);
+let yyyy_mm_dd = `${year}/${month.toString().padStart(2, "0")}/${day
+  .toString()
+  .padStart(2, "0")}`;
+
 const none = document.querySelector("#none");
 const morning = document.querySelector("#morning");
 const lunch = document.querySelector("#lunch");
 const evening = document.querySelector("#evening");
 
 document.querySelector("h2").innerText = yyyy_mm_dd;
+
 async function fetchData(mealIndex) {
   try {
     const response = await fetch(
@@ -64,16 +68,24 @@ function showMeal(mealType) {
 }
 
 function updateDate(offset) {
-  const date = new Date(year, month - 1, day);
+  const date = new Date(year, month - 1, day); // month는 0 기반
 
   date.setDate(date.getDate() + offset);
 
   year = date.getFullYear();
-  month = (date.getMonth() + 1).toString().padStart(2, "0");
-  day = date.getDate().toString().padStart(2, "0");
+  month = date.getMonth() + 1; // 숫자로 처리
+  day = date.getDate();
 
-  yyyymmdd = `${year}${month}${day}`;
-  yyyy_mm_dd = `${year}/${month}/${day}`;
+  yyyymmdd = formatDate(year, month, day);
+  yyyy_mm_dd = `${year}/${month.toString().padStart(2, "0")}/${day
+    .toString()
+    .padStart(2, "0")}`;
+}
+
+function formatDate(year, month, day) {
+  return `${year}${month.toString().padStart(2, "0")}${day
+    .toString()
+    .padStart(2, "0")}`;
 }
 
 function tomorrow() {
