@@ -7,6 +7,8 @@ body {
 ul {
   display: inline;
   gap: 10px;
+  font-size: large;
+  font-weight: 600;
 }
 button {
   margin: 10px;
@@ -16,4 +18,12 @@ button {
   color: white;
   font-size: large;
   font-weight: 600;
+}
+#yesterday {
+  position: fixed;
+  left: 10px;
+}
+#tomorrow {
+  position: fixed;
+  right: 10px;
 }
