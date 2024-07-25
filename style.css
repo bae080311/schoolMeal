@@ -22,8 +22,12 @@ button {
 #yesterday {
   position: fixed;
   left: 10px;
+  width: 30px;
+  height: 30px;
 }
 #tomorrow {
   position: fixed;
   right: 10px;
+  width: 30px;
+  height: 30px;
 }
