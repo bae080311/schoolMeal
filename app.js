@@ -1,11 +1,21 @@
 const apiUrl = "https://open.neis.go.kr/hub/mealServiceDietInfo";
-const today = new Date();
-const year = today.getFullYear();
-const month = (today.getMonth() + 1).toString().padStart(2, "0");
-const day = today.getDate().toString().padStart(2, "0");
-const yyyymmdd = `${year}${month}${day}`;
+let today = new Date();
+let year = today.getFullYear();
+let month = today.getMonth() + 1; // 숫자로 처리
+let day = today.getDate();
+let yyyymmdd = formatDate(year, month, day);
+let yyyy_mm_dd = `${year}/${month.toString().padStart(2, "0")}/${day
+  .toString()
+  .padStart(2, "0")}`;
 
-async function fetchData(Meal) {
+const none = document.querySelector("#none");
+const morning = document.querySelector("#morning");
+const lunch = document.querySelector("#lunch");
+const evening = document.querySelector("#evening");
+
+document.querySelector("h2").innerText = yyyy_mm_dd;
+
+async function fetchData(mealIndex) {
   try {
     const response = await fetch(
       `${apiUrl}?ATPT_OFCDC_SC_CODE=F10&SD_SCHUL_CODE=7380292&KEY=9cde42a440814d009aa596c3e097e2a1&MLSV_YMD=${yyyymmdd}&TYPE=JSON`
@@ -17,35 +27,33 @@ async function fetchData(Meal) {
       data.mealServiceDietInfo[1] &&
       data.mealServiceDietInfo[1].row
     ) {
-      return data.mealServiceDietInfo[1].row[Meal].DDISH_NM;
+      none.classList.add("hidden");
+      return data.mealServiceDietInfo[1].row[mealIndex].DDISH_NM;
     } else {
       throw new Error("급식 정보를 가져오지 못했습니다.");
     }
   } catch (error) {
     console.error(error);
-    const None = document.createElement("h2");
-    None.textContent = "급식 정보를 가져오지 못했습니다.";
-    document.body.appendChild(None);
+    none.classList.remove("hidden");
   }
 }
 
 function showMeal(mealType) {
-  // 모든 섹션 숨기기
   document.getElementById("morning").classList.add("hidden");
   document.getElementById("lunch").classList.add("hidden");
   document.getElementById("evening").classList.add("hidden");
 
   let mealIndex;
   if (mealType === "morning") mealIndex = 0;
-  if (mealType === "lunch") mealIndex = 1;
-  if (mealType === "evening") mealIndex = 2;
+  else if (mealType === "lunch") mealIndex = 1;
+  else if (mealType === "evening") mealIndex = 2;
 
   fetchData(mealIndex)
     .then((mealData) => {
       if (mealData) {
         const mealElement = document.getElementById(mealType);
         const mealList = mealElement.querySelector("ul");
-        mealList.innerHTML = ""; // 기존 내용을 비우기
+        mealList.innerHTML = "";
         mealData.split("<br/>").forEach((item) => {
           const listItem = document.createElement("li");
           listItem.textContent = item;
@@ -57,4 +65,43 @@ function showMeal(mealType) {
     .catch((error) => {
       console.error("Error fetching meal data:", error);
     });
+}
+
+function updateDate(offset) {
+  const date = new Date(year, month - 1, day); // month는 0 기반
+
+  date.setDate(date.getDate() + offset);
+
+  year = date.getFullYear();
+  month = date.getMonth() + 1; // 숫자로 처리
+  day = date.getDate();
+
+  yyyymmdd = formatDate(year, month, day);
+  yyyy_mm_dd = `${year}/${month.toString().padStart(2, "0")}/${day
+    .toString()
+    .padStart(2, "0")}`;
+}
+
+function formatDate(year, month, day) {
+  return `${year}${month.toString().padStart(2, "0")}${day
+    .toString()
+    .padStart(2, "0")}`;
+}
+
+function tomorrow() {
+  updateDate(1);
+  document.querySelector("h2").innerText = yyyy_mm_dd;
+  morning.classList.add("hidden");
+  lunch.classList.add("hidden");
+  evening.classList.add("hidden");
+  none.classList.add("hidden");
+}
+
+function yesterday() {
+  updateDate(-1);
+  document.querySelector("h2").innerText = yyyy_mm_dd;
+  morning.classList.add("hidden");
+  lunch.classList.add("hidden");
+  evening.classList.add("hidden");
+  none.classList.add("hidden");
 }

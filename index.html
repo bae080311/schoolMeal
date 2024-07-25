@@ -26,8 +26,8 @@
         <button onclick="showMeal('evening')">석식</button>
       </div>
     </header>
-    <button id="yesterday" onclick="yesterday"><</button>
-    <button id="tomorrow" onclick="tomorrow">></button>
+    <button id="yesterday" onclick="yesterday()"><</button>
+    <button id="tomorrow" onclick="tomorrow()">></button>
     <div class="container">
       <div id="morning" class="hidden">
         <h2>조식</h2>
@@ -41,6 +41,7 @@
         <h2>석식</h2>
         <ul></ul>
       </div>
+      <div class="hidden" id="none">급식 정보 없음</div>
     </div>
     <script src="app.js"></script>
   </body>

@@ -22,8 +22,18 @@ button {
 #yesterday {
   position: fixed;
   left: 10px;
+  width: 50px;
+  height: 50px;
+  font-size: large;
 }
 #tomorrow {
   position: fixed;
   right: 10px;
+  width: 50px;
+  height: 50px;
+  font-size: large;
+}
+#none {
+  font-size: x-large;
+  font-weight: 600;
 }
