@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>급식</title>
+    <link
+      rel="icon"
+      href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToFSWn80mj4nwDzTwbVUAE1DdOBYn7WgzRSQ&s"
+    />
+    <title>소마고 급식</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -14,6 +18,7 @@
           alt="로고 이미지"
         />
         <h1>광주소프트웨어마이스터고등학교 오늘의 급식판</h1>
+        <h2></h2>
       </div>
       <div id="button">
         <button onclick="showMeal('morning')">조식</button>
@@ -21,6 +26,8 @@
         <button onclick="showMeal('evening')">석식</button>
       </div>
     </header>
+    <button id="yesterday" onclick="yesterday"><</button>
+    <button id="tomorrow" onclick="tomorrow">></button>
     <div class="container">
       <div id="morning" class="hidden">
         <h2>조식</h2>
