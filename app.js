@@ -5,6 +5,7 @@ let month = (today.getMonth() + 1).toString().padStart(2, "0");
 let day = today.getDate().toString().padStart(2, "0");
 let yyyymmdd = `${year}${month}${day}`;
 let yyyy_mm_dd = `${year}/${month}/${day}`;
+const none = document.querySelector("#none");
 
 document.querySelector("h2").innerText = yyyy_mm_dd;
 async function fetchData(mealIndex) {
@@ -19,15 +20,14 @@ async function fetchData(mealIndex) {
       data.mealServiceDietInfo[1] &&
       data.mealServiceDietInfo[1].row
     ) {
+      none.classList.add("hidden");
       return data.mealServiceDietInfo[1].row[mealIndex].DDISH_NM;
     } else {
       throw new Error("급식 정보를 가져오지 못했습니다.");
     }
   } catch (error) {
     console.error(error);
-    const noneElement = document.createElement("h2");
-    noneElement.textContent = "급식 정보를 가져오지 못했습니다.";
-    document.body.appendChild(noneElement);
+    none.classList.remove("hidden");
   }
 }
 

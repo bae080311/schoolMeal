@@ -31,3 +31,7 @@ button {
   width: 30px;
   height: 30px;
 }
+#none {
+  font-size: x-large;
+  font-weight: 600;
+}
