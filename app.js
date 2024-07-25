@@ -6,6 +6,9 @@ let day = today.getDate().toString().padStart(2, "0");
 let yyyymmdd = `${year}${month}${day}`;
 let yyyy_mm_dd = `${year}/${month}/${day}`;
 const none = document.querySelector("#none");
+const morning = document.querySelector("#morning");
+const lunch = document.querySelector("#lunch");
+const evening = document.querySelector("#evening");
 
 document.querySelector("h2").innerText = yyyy_mm_dd;
 async function fetchData(mealIndex) {
@@ -76,9 +79,17 @@ function updateDate(offset) {
 function tomorrow() {
   updateDate(1);
   document.querySelector("h2").innerText = yyyy_mm_dd;
+  morning.classList.add("hidden");
+  lunch.classList.add("hidden");
+  evening.classList.add("hidden");
+  none.classList.add("hidden");
 }
 
 function yesterday() {
   updateDate(-1);
   document.querySelector("h2").innerText = yyyy_mm_dd;
+  morning.classList.add("hidden");
+  lunch.classList.add("hidden");
+  evening.classList.add("hidden");
+  none.classList.add("hidden");
 }
